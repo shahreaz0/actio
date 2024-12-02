@@ -1,6 +1,7 @@
 {
   "name": "actio",
   "type": "module",
+  "version": "1.0.0",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "typecheck": "tsc --noEmit",
@@ -10,6 +11,7 @@
   "dependencies": {
     "@hono/node-server": "^1.13.7",
     "@hono/zod-openapi": "^0.18.3",
+    "@scalar/hono-api-reference": "^0.5.162",
     "hono": "^4.6.12",
     "hono-pino": "^0.7.0",
     "pino": "^9.5.0",

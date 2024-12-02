@@ -5,8 +5,12 @@ import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares"
 import type { AppBindings } from "@/lib/types"
 import { logger } from "@/middlewares/pino-logger"
 
+export function createRouter() {
+  return new OpenAPIHono<AppBindings>({ strict: false })
+}
+
 export function createApp() {
-  const app = new OpenAPIHono<AppBindings>({ strict: false })
+  const app = createRouter()
 
   app.use(serveEmojiFavicon("🔥"))
   app.use(requestId())

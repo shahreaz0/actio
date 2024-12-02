@@ -1,3 +1,4 @@
+import type { OpenAPIHono } from "@hono/zod-openapi"
 import type { PinoLogger } from "hono-pino"
 
 export type AppBindings = {
@@ -5,3 +6,5 @@ export type AppBindings = {
     logger: PinoLogger
   }
 }
+
+export type AppOpenAPI = OpenAPIHono<AppBindings>

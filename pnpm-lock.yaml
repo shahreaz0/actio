@@ -14,6 +14,9 @@ importers:
       '@hono/zod-openapi':
         specifier: ^0.18.3
         version: 0.18.3(hono@4.6.12)(zod@3.23.8)
+      '@scalar/hono-api-reference':
+        specifier: ^0.5.162
+        version: 0.5.162(hono@4.6.12)
       hono:
         specifier: ^4.6.12
         version: 4.6.12
@@ -269,8 +272,25 @@ packages:
       hono: '>=3.9.0'
       zod: ^3.19.1
 
+  '@scalar/hono-api-reference@0.5.162':
+    resolution: {integrity: sha512-WoC6lLXLYSB6OxDuybtYe+5/EdU0M33DPsknjRsOImp+L6Qn64OZvKwyf7033rEHWvqqpwvEB9r+2zZ4F6KhoQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      hono: ^4.0.0
+
+  '@scalar/openapi-types@0.1.5':
+    resolution: {integrity: sha512-6geH9ehvQ/sG/xUyy3e0lyOw3BaY5s6nn22wHjEJhcobdmWyFER0O6m7AU0ZN4QTjle/gYvFJOjj552l/rsNSw==}
+    engines: {node: '>=18'}
+
+  '@scalar/types@0.0.22':
+    resolution: {integrity: sha512-+S1flivP58p2uiHM4dU5ZaAb20wbVcP0nV39KWoVjijvHDx1HWtAGg+PaDXRCRj2zM4QzBeg4olaso20Tm26fQ==}
+    engines: {node: '>=18'}
+
   '@types/node@20.17.9':
     resolution: {integrity: sha512-0JOXkRyLanfGPE2QRCwgxhzlBAvaRdCNMcvbd7jFfpmD4eEXll7LRwy5ymJmyeZqk7Nh7eD2LeUyQ68BbndmXw==}
+
+  '@unhead/schema@1.11.13':
+    resolution: {integrity: sha512-fIpQx6GCpl99l4qJXsPqkXxO7suMccuLADbhaMSkeXnVEi4ZIle+l+Ri0z+GHAEpJj17FMaQdO5n9FMSOMUxkw==}
 
   atomic-sleep@1.0.0:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
@@ -324,6 +344,9 @@ packages:
   hono@4.6.12:
     resolution: {integrity: sha512-eHtf4kSDNw6VVrdbd5IQi16r22m3s7mWPLd7xOMhg1a/Yyb1A0qpUFq8xYMX4FMuDe1nTKeMX5rTx7Nmw+a+Ag==}
     engines: {node: '>=16.9.0'}
+
+  hookable@5.5.3:
+    resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
 
   joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
@@ -424,6 +447,9 @@ packages:
     resolution: {integrity: sha512-7r0XPzioN/Q9kXBro/XPnA6kznR73DHq+GXh5ON7ZozRO6aMjbmiBuKste2wslTFkC5d1dw0GooOCepZXJ2SAg==}
     engines: {node: '>= 14'}
     hasBin: true
+
+  zhead@2.2.4:
+    resolution: {integrity: sha512-8F0OI5dpWIA5IGG5NHUg9staDwz/ZPxZtvGVf01j7vHqSyZ0raHY+78atOVxRqb73AotX22uV1pXt3gYSstGag==}
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
@@ -558,9 +584,26 @@ snapshots:
       hono: 4.6.12
       zod: 3.23.8
 
+  '@scalar/hono-api-reference@0.5.162(hono@4.6.12)':
+    dependencies:
+      '@scalar/types': 0.0.22
+      hono: 4.6.12
+
+  '@scalar/openapi-types@0.1.5': {}
+
+  '@scalar/types@0.0.22':
+    dependencies:
+      '@scalar/openapi-types': 0.1.5
+      '@unhead/schema': 1.11.13
+
   '@types/node@20.17.9':
     dependencies:
       undici-types: 6.19.8
+
+  '@unhead/schema@1.11.13':
+    dependencies:
+      hookable: 5.5.3
+      zhead: 2.2.4
 
   atomic-sleep@1.0.0: {}
 
@@ -623,6 +666,8 @@ snapshots:
       pino: 9.5.0
 
   hono@4.6.12: {}
+
+  hookable@5.5.3: {}
 
   joycon@3.1.1: {}
 
@@ -725,5 +770,7 @@ snapshots:
   wrappy@1.0.2: {}
 
   yaml@2.6.1: {}
+
+  zhead@2.2.4: {}
 
   zod@3.23.8: {}
