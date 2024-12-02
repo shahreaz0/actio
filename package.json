@@ -11,6 +11,9 @@
     "@hono/node-server": "^1.13.7",
     "@hono/zod-openapi": "^0.18.3",
     "hono": "^4.6.12",
+    "hono-pino": "^0.7.0",
+    "pino": "^9.5.0",
+    "pino-pretty": "^13.0.0",
     "stoker": "^1.4.2"
   },
   "devDependencies": {
