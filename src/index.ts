@@ -1,7 +1,8 @@
+import { app } from "@/app"
+import { env } from "@/env"
 import { serve } from "@hono/node-server"
-import { app } from "./app"
 
-const port = 3000
+const port = env.PORT || 3000
 console.log(`Server is running on http://localhost:${port}`)
 
 serve({

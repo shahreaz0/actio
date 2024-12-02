@@ -1,7 +1,7 @@
 import { OpenAPIHono } from "@hono/zod-openapi"
 import type { PinoLogger } from "hono-pino"
 import { requestId } from "hono/request-id"
-import { notFound, onError } from "stoker/middlewares"
+import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares"
 
 import { logger } from "@/middlewares/pino-logger"
 
@@ -13,6 +13,7 @@ export type AppBindings = {
 
 export const app = new OpenAPIHono<AppBindings>()
 
+app.use(serveEmojiFavicon("🔥"))
 app.use(requestId())
 app.use(logger())
 
