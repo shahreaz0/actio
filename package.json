@@ -2,15 +2,21 @@
   "name": "actio",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "lint:fix": "biome check --write"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
-    "hono": "^4.6.12"
+    "@hono/zod-openapi": "^0.18.3",
+    "hono": "^4.6.12",
+    "stoker": "^1.4.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/node": "^20.11.17",
-    "tsx": "^4.7.1"
+    "tsx": "^4.7.1",
+    "typescript": "^5.7.2"
   }
 }
