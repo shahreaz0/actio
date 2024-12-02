@@ -1,27 +1,7 @@
-import { OpenAPIHono } from "@hono/zod-openapi"
-import type { PinoLogger } from "hono-pino"
-import { requestId } from "hono/request-id"
-import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares"
+import { createApp } from "./lib/create-app"
 
-import { logger } from "@/middlewares/pino-logger"
-
-export type AppBindings = {
-  Variables: {
-    logger: PinoLogger
-  }
-}
-
-export const app = new OpenAPIHono<AppBindings>()
-
-app.use(serveEmojiFavicon("🔥"))
-app.use(requestId())
-app.use(logger())
+export const app = createApp()
 
 app.get("/", (c) => {
-  c.var.logger.info("hello")
-
-  return c.text("Hello Hono!")
+  return c.json({ message: "hello" })
 })
-
-app.notFound(notFound)
-app.onError(onError)
