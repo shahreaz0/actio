@@ -1,6 +1,10 @@
 import { ZodError, z } from "zod"
 
-process.loadEnvFile()
+// process.loadEnvFile()
+
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production"]).default("development"),

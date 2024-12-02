@@ -17,6 +17,9 @@ importers:
       '@scalar/hono-api-reference':
         specifier: ^0.5.162
         version: 0.5.162(hono@4.6.12)
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       hono:
         specifier: ^4.6.12
         version: 4.6.12
@@ -304,6 +307,10 @@ packages:
 
   defu@6.1.4:
     resolution: {integrity: sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==}
+
+  dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
 
   end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
@@ -612,6 +619,8 @@ snapshots:
   dateformat@4.6.3: {}
 
   defu@6.1.4: {}
+
+  dotenv@16.4.5: {}
 
   end-of-stream@1.4.4:
     dependencies:
