@@ -4,9 +4,10 @@ import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares"
 
 import type { AppBindings } from "@/lib/types"
 import { logger } from "@/middlewares/pino-logger"
+import { defaultHook } from "stoker/openapi"
 
 export function createRouter() {
-  return new OpenAPIHono<AppBindings>({ strict: false })
+  return new OpenAPIHono<AppBindings>({ strict: false, defaultHook })
 }
 
 export function createApp() {

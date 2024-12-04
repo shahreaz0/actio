@@ -1,8 +1,9 @@
 import { configureOpenAPI } from "./lib/configure-openapi"
 import { createApp } from "./lib/create-app"
-import { index } from "./routes/index.route"
+import { index } from "./modules/index.routes"
+import { tasks } from "./modules/tasks/tasks.index"
 
-const routes = [index]
+const routes = [index, tasks]
 
 export const app = createApp()
 

@@ -9,6 +9,8 @@ export function configureOpenAPI(app: AppOpenAPI) {
     info: {
       version: packageJSON.version,
       title: "Actio API",
+      description:
+        "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). \n\nSome useful links:\n- [Actio repository](https://github.com/shahreaz0/actio)",
     },
   })
 
@@ -17,6 +19,10 @@ export function configureOpenAPI(app: AppOpenAPI) {
     apiReference({
       spec: {
         url: "/doc",
+      },
+      defaultHttpClient: {
+        targetKey: "javascript",
+        clientKey: "axios",
       },
     }),
   )
