@@ -1,3 +1,4 @@
+import { insertTasksSchema, selectTasksSchema } from "@/db/schema"
 import { createRoute, z } from "@hono/zod-openapi"
 
 const tags = ["Tasks"]
@@ -13,18 +14,41 @@ export const list = createRoute({
       description: "successful operation",
       content: {
         "application/json": {
-          schema: z
-            .object({
-              message: z.string().openapi({ example: "Success" }),
-              data: z.array(
-                z.object({
-                  id: z.string().openapi({ example: "1" }),
-                  name: z.string().openapi({ example: "Yoshi" }),
-                  done: z.boolean().openapi({ example: false }),
-                }),
-              ),
-            })
-            .openapi("Task"),
+          schema: z.object({
+            success: z.boolean().openapi({ example: true }),
+            data: z.array(selectTasksSchema),
+          }),
+        },
+      },
+    },
+  },
+})
+
+export const create = createRoute({
+  tags,
+  method: "post",
+  path: "/tasks",
+  summary: "Create a Task",
+  description: "You can create tasks for a user",
+  request: {
+    body: {
+      description: "The task to create",
+      content: {
+        "application/json": {
+          schema: insertTasksSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: "successful operation",
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.boolean(),
+            data: selectTasksSchema,
+          }),
         },
       },
     },
@@ -32,3 +56,4 @@ export const list = createRoute({
 })
 
 export type ListRoute = typeof list
+export type CreateRoute = typeof create

@@ -10,6 +10,8 @@ const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production"]).default("development"),
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]),
   PORT: z.coerce.number().default(9999),
+  DATABASE_URL: z.string().url(),
+  DATABASE_AUTH_TOKEN: z.string().optional(),
 })
 
 export let env: z.infer<typeof envSchema>
