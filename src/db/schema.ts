@@ -11,7 +11,7 @@ export const tasks = sqliteTable("tasks", {
     .notNull(),
 })
 
-export const selectTasksSchema = createSelectSchema(tasks).openapi("Task")
+export const selectTasksSchema = createSelectSchema(tasks)
 export const insertTasksSchema = createInsertSchema(tasks, {
   name: (schema) => schema.name.max(255).min(1),
 }).omit({

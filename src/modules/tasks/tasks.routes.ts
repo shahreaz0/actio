@@ -16,7 +16,7 @@ export const list = createRoute({
         "application/json": {
           schema: z.object({
             success: z.boolean().openapi({ example: true }),
-            data: z.array(selectTasksSchema),
+            data: z.array(selectTasksSchema.openapi("Task")),
           }),
         },
       },
