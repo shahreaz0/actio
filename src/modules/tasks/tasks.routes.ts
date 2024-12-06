@@ -1,5 +1,5 @@
-import { insertTasksSchema, selectTasksSchema } from "@/db/schema"
 import { createRoute, z } from "@hono/zod-openapi"
+import { insertTasksSchema, selectTasksSchema } from "./tasks.schemas"
 
 const tags = ["Tasks"]
 
