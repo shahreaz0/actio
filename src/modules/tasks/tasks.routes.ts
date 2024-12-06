@@ -1,4 +1,5 @@
 import { createRoute, z } from "@hono/zod-openapi"
+import { createErrorSchema } from "stoker/openapi/schemas"
 import { insertTasksSchema, selectTasksSchema } from "./tasks.schemas"
 
 const tags = ["Tasks"]
@@ -16,7 +17,7 @@ export const list = createRoute({
         "application/json": {
           schema: z.object({
             success: z.boolean().openapi({ example: true }),
-            data: z.array(selectTasksSchema.openapi("Task")),
+            data: z.array(selectTasksSchema),
           }),
         },
       },
@@ -49,6 +50,14 @@ export const create = createRoute({
             success: z.boolean(),
             data: selectTasksSchema,
           }),
+        },
+      },
+    },
+    422: {
+      description: "invalid body",
+      content: {
+        "application/json": {
+          schema: createErrorSchema(insertTasksSchema),
         },
       },
     },

@@ -18,8 +18,11 @@ export const create: RouteHandler<CreateRoute, AppBindings> = async (c) => {
 
   const [inserted] = await db.insert(tasks).values(task).returning()
 
-  return c.json({
-    success: true,
-    data: inserted,
-  })
+  return c.json(
+    {
+      success: true,
+      data: inserted,
+    },
+    200,
+  )
 }
