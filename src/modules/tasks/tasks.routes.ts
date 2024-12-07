@@ -1,6 +1,8 @@
+import { idParamsSchema, notFoundSchema } from "@/lib/schema-constants"
 import { createRoute, z } from "@hono/zod-openapi"
+import { oneOf } from "stoker/openapi/helpers"
 import { createErrorSchema } from "stoker/openapi/schemas"
-import { insertTasksSchema, selectTasksSchema } from "./tasks.schemas"
+import { insertTasksSchema, patchTasksSchema, selectTasksSchema } from "./tasks.schemas"
 
 const tags = ["Tasks"]
 
@@ -68,12 +70,10 @@ export const getOne = createRoute({
   tags,
   method: "get",
   path: "/tasks/{id}",
-  summary: "Get task list",
+  summary: "Get a task",
   description: "Get all the tasks of a user",
   request: {
-    params: z.object({
-      id: z.coerce.number().openapi({ param: { name: "id", in: "path" } }),
-    }),
+    params: idParamsSchema,
   },
   responses: {
     200: {
@@ -91,9 +91,60 @@ export const getOne = createRoute({
       description: "not found",
       content: {
         "application/json": {
+          schema: notFoundSchema,
+        },
+      },
+    },
+  },
+})
+
+export const patch = createRoute({
+  tags,
+  method: "patch",
+  path: "/tasks/{id}",
+  summary: "Update a task",
+  description: "Update a task of a user",
+  request: {
+    params: idParamsSchema,
+    body: {
+      description: "body",
+      content: {
+        "application/json": {
+          schema: patchTasksSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: "successful operation",
+      content: {
+        "application/json": {
           schema: z.object({
-            mesage: z.string().openapi({ example: "Not found" }),
+            success: z.boolean().openapi({ example: true }),
+            data: selectTasksSchema,
           }),
+        },
+      },
+    },
+    422: {
+      description: "invalid body",
+      content: {
+        "application/json": {
+          schema: {
+            oneOf: oneOf([
+              createErrorSchema(patchTasksSchema),
+              createErrorSchema(idParamsSchema),
+            ]),
+          },
+        },
+      },
+    },
+    404: {
+      description: "not found",
+      content: {
+        "application/json": {
+          schema: notFoundSchema,
         },
       },
     },
@@ -103,3 +154,4 @@ export const getOne = createRoute({
 export type ListRoute = typeof list
 export type CreateRoute = typeof create
 export type GetOneRoute = typeof getOne
+export type PatchRoute = typeof patch

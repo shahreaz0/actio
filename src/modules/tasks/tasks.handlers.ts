@@ -2,7 +2,8 @@ import { db } from "@/db"
 import { tasks } from "@/db/schema"
 import type { AppBindings } from "@/lib/types"
 import type { RouteHandler } from "@hono/zod-openapi"
-import type { CreateRoute, GetOneRoute, ListRoute } from "./tasks.routes"
+import { eq } from "drizzle-orm"
+import type { CreateRoute, GetOneRoute, ListRoute, PatchRoute } from "./tasks.routes"
 
 export const list: RouteHandler<ListRoute, AppBindings> = async (c) => {
   const tasks = await db.query.tasks.findMany()
@@ -37,7 +38,30 @@ export const getOne: RouteHandler<GetOneRoute, AppBindings> = async (c) => {
   })
 
   if (!task) {
-    return c.json({ mesage: "Not found" }, 404)
+    return c.json({ success: false, message: "Not found" }, 404)
+  }
+
+  return c.json(
+    {
+      success: false,
+      data: task,
+    },
+    200,
+  )
+}
+
+export const patch: RouteHandler<PatchRoute, AppBindings> = async (c) => {
+  const params = c.req.valid("param")
+  const updates = c.req.valid("json")
+
+  const [task] = await db
+    .update(tasks)
+    .set(updates)
+    .where(eq(tasks.id, params.id))
+    .returning()
+
+  if (!task) {
+    return c.json({ success: false, message: "Not found" }, 404)
   }
 
   return c.json(
