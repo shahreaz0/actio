@@ -9,7 +9,7 @@
     "lint": "biome check",
     "lint:fix": "biome check --write",
     "test": "vitest",
-    "build": "rm -rf dist && tsc && tsc-alias"
+    "build": "tsc && tsc-alias"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
