@@ -1,4 +1,4 @@
-import packageJSON from "package.json"
+import packageJSON from "package.json" with { type: "json" }
 import type { AppOpenAPI } from "./types"
 
 import { apiReference } from "@scalar/hono-api-reference"

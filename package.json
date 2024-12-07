@@ -3,12 +3,13 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
+    "start": "npm run build && node ./dist/src",
     "dev": "tsx watch src/index.ts",
     "typecheck": "tsc --noEmit",
     "lint": "biome check",
     "lint:fix": "biome check --write",
-    "start": "drizzle-kit push && tsx src",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "rm -rf dist && tsc && tsc-alias"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
@@ -29,6 +30,7 @@
     "@biomejs/biome": "1.9.4",
     "@types/node": "^20.11.17",
     "drizzle-kit": "^0.29.1",
+    "tsc-alias": "^1.8.10",
     "tsx": "^4.7.1",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
