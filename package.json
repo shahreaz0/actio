@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run build && node ./dist/src",
+    "start": "tsx src",
     "dev": "tsx watch src/index.ts",
     "typecheck": "tsc --noEmit",
     "lint": "biome check",
