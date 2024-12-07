@@ -49,7 +49,7 @@ export const getOne: RouteHandler<GetOneRoute, AppBindings> = async (c) => {
 
   return c.json(
     {
-      success: false,
+      success: true,
       data: task,
     },
     200,
@@ -88,5 +88,5 @@ export const remove: RouteHandler<RemoveRoute, AppBindings> = async (c) => {
     return c.json({ success: false, message: "Not found" }, 404)
   }
 
-  return c.json({ success: true, id: params.id }, 200)
+  return c.json({ success: true, data: { id: params.id } }, 200)
 }

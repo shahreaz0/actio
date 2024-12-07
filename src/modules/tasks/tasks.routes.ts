@@ -1,6 +1,5 @@
 import { idParamsSchema, notFoundSchema } from "@/lib/schema-constants"
 import { createRoute, z } from "@hono/zod-openapi"
-import { oneOf } from "stoker/openapi/helpers"
 import { createErrorSchema } from "stoker/openapi/schemas"
 import { insertTasksSchema, patchTasksSchema, selectTasksSchema } from "./tasks.schemas"
 
@@ -87,6 +86,14 @@ export const getOne = createRoute({
         },
       },
     },
+    422: {
+      description: "invalid path params",
+      content: {
+        "application/json": {
+          schema: createErrorSchema(idParamsSchema),
+        },
+      },
+    },
     404: {
       description: "not found",
       content: {
@@ -131,12 +138,10 @@ export const patch = createRoute({
       description: "invalid body",
       content: {
         "application/json": {
-          schema: {
-            oneOf: oneOf([
-              createErrorSchema(patchTasksSchema),
-              createErrorSchema(idParamsSchema),
-            ]),
-          },
+          schema: z.union([
+            createErrorSchema(patchTasksSchema),
+            createErrorSchema(idParamsSchema),
+          ]),
         },
       },
     },
@@ -165,7 +170,15 @@ export const remove = createRoute({
       description: "successful",
       content: {
         "application/json": {
-          schema: z.object({ success: z.boolean(), id: z.number() }),
+          schema: z.object({ success: z.boolean(), data: z.object({ id: z.number() }) }),
+        },
+      },
+    },
+    422: {
+      description: "invalid path params",
+      content: {
+        "application/json": {
+          schema: createErrorSchema(idParamsSchema),
         },
       },
     },
