@@ -17,9 +17,9 @@ describe("tasks routes", () => {
     execSync("pnpm drizzle-kit push")
   })
 
-  //   afterAll(() => {
-  //     fs.rmSync("test.db", { force: true })
-  //   })
+  afterAll(() => {
+    fs.rmSync("test.db", { force: true })
+  })
 
   it("post /tasks validates the body", async () => {
     const res = await client.tasks.$post({
