@@ -6,3 +6,4 @@ import * as routes from "./tasks.routes"
 export const tasks = createRouter()
   .openapi(routes.list, handlers.list)
   .openapi(routes.create, handlers.create)
+  .openapi(routes.getOne, handlers.getOne)

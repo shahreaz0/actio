@@ -64,5 +64,42 @@ export const create = createRoute({
   },
 })
 
+export const getOne = createRoute({
+  tags,
+  method: "get",
+  path: "/tasks/{id}",
+  summary: "Get task list",
+  description: "Get all the tasks of a user",
+  request: {
+    params: z.object({
+      id: z.coerce.number().openapi({ param: { name: "id", in: "path" } }),
+    }),
+  },
+  responses: {
+    200: {
+      description: "successful operation",
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.boolean().openapi({ example: true }),
+            data: selectTasksSchema,
+          }),
+        },
+      },
+    },
+    404: {
+      description: "not found",
+      content: {
+        "application/json": {
+          schema: z.object({
+            mesage: z.string().openapi({ example: "Not found" }),
+          }),
+        },
+      },
+    },
+  },
+})
+
 export type ListRoute = typeof list
 export type CreateRoute = typeof create
+export type GetOneRoute = typeof getOne
