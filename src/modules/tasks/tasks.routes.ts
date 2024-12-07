@@ -10,7 +10,7 @@ export const list = createRoute({
   tags,
   method: "get",
   path: "/tasks",
-  summary: "Get Task List",
+  summary: "Get task list",
   description: "Get all the tasks of a user",
   responses: {
     200: {
@@ -31,7 +31,7 @@ export const create = createRoute({
   tags,
   method: "post",
   path: "/tasks",
-  summary: "Create a Task",
+  summary: "Create a task",
   description: "You can create tasks for a user",
   request: {
     body: {
