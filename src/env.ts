@@ -2,13 +2,19 @@ import { ZodError, z } from "zod"
 
 // process.loadEnvFile()
 
+import path from "node:path"
 import dotenv from "dotenv"
 
-dotenv.config()
+dotenv.config({
+  path: path.resolve(
+    process.cwd(),
+    process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+  ),
+})
 
 const envSchema = z.object({
-  NODE_ENV: z.enum(["development", "production"]).default("development"),
-  LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]),
+  NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+  LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]),
   PORT: z.coerce.number().default(9999),
   DATABASE_URL: z.string().url(),
   DATABASE_AUTH_TOKEN: z.string().optional(),
