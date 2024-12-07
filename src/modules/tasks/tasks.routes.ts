@@ -151,7 +151,37 @@ export const patch = createRoute({
   },
 })
 
+export const remove = createRoute({
+  tags,
+  method: "delete",
+  path: "/tasks/{id}",
+  summary: "Delete a task",
+  description: "Delete a task of a user",
+  request: {
+    params: idParamsSchema,
+  },
+  responses: {
+    200: {
+      description: "successful",
+      content: {
+        "application/json": {
+          schema: z.object({ success: z.boolean(), id: z.number() }),
+        },
+      },
+    },
+    404: {
+      description: "not found",
+      content: {
+        "application/json": {
+          schema: notFoundSchema,
+        },
+      },
+    },
+  },
+})
+
 export type ListRoute = typeof list
 export type CreateRoute = typeof create
 export type GetOneRoute = typeof getOne
 export type PatchRoute = typeof patch
+export type RemoveRoute = typeof remove

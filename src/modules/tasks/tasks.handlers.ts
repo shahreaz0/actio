@@ -3,7 +3,13 @@ import { tasks } from "@/db/schema"
 import type { AppBindings } from "@/lib/types"
 import type { RouteHandler } from "@hono/zod-openapi"
 import { eq } from "drizzle-orm"
-import type { CreateRoute, GetOneRoute, ListRoute, PatchRoute } from "./tasks.routes"
+import type {
+  CreateRoute,
+  GetOneRoute,
+  ListRoute,
+  PatchRoute,
+  RemoveRoute,
+} from "./tasks.routes"
 
 export const list: RouteHandler<ListRoute, AppBindings> = async (c) => {
   const tasks = await db.query.tasks.findMany()
@@ -71,4 +77,16 @@ export const patch: RouteHandler<PatchRoute, AppBindings> = async (c) => {
     },
     200,
   )
+}
+
+export const remove: RouteHandler<RemoveRoute, AppBindings> = async (c) => {
+  const params = c.req.valid("param")
+
+  const results = await db.delete(tasks).where(eq(tasks.id, params.id))
+
+  if (results.rowsAffected === 0) {
+    return c.json({ success: false, message: "Not found" }, 404)
+  }
+
+  return c.json({ success: true, id: params.id }, 200)
 }
